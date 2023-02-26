@@ -1,11 +1,9 @@
 <?php
-
 $connection = new mysqli(
     "localhost",
     "root",
     "",
-    "park"
-);
+    "park");
 
 $job_title = "";
 $responsibilities = "";
@@ -25,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             empty($responsibilities) ||
             empty($work_experience)
         ) {
-            $errorMessage = "Заполните все поля";
+            $errorMessage = "Все поля должны быть заполнены";
             break;
         }
 
@@ -38,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
 
-
         $job_title = "";
         $responsibilities = "";
         $work_experience = "";
@@ -47,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         header("location: /index.php");
         exit;
-
     } while (false);
 }
 ?>
@@ -81,23 +77,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <form method="post">
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Наименование</label>
+            <label class="col-sm-3 col-form-label">Название</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="job_title"
-                       value="<?php echo $job_title; ?>">
+                <input type="text" class="form-control" name="job_title" value="<?php echo $job_title; ?>">
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Обязанности</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="responsibilities"
-                       value="<?php echo $responsibilities; ?>">
+                <input type="text" class="form-control" name="responsibilities" value="<?php echo $responsibilities; ?>">
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Требуемый опыт</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="work_experience" value="<?php echo $work_experience; ?>">
+                <input type="text" class="form-control" name="work_experience"
+                       value="<?php echo $work_experience; ?>">
             </div>
         </div>
 
