@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     do {
         if (
-                empty($activity_id) ||
-                empty($activity_title) ||
-                empty($price) ||
-                empty($age_restrictions) ||
-                empty($max_count_people)
+            empty($activity_id) ||
+            empty($activity_title) ||
+            empty($price) ||
+            empty($age_restrictions) ||
+            empty($max_count_people)
         ) {
             $errorMessage = "Все поля должны быть заполнены";
             break;
@@ -95,50 +95,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 
 <body>
-    <div class="container my-5">
-        <h2>Изменить данные</h2>
+<div class="container my-5">
+    <h2>Изменить данные</h2>
 
-        <?php
-        if (!empty($errorMessage)) {
-            echo "
+    <?php
+    if (!empty($errorMessage)) {
+        echo "
             <div class='alert alert-warning alert-dismissible fade show' role='alert'>
                 <strong>$errorMessage</strong>
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
             </div>
             ";
-        }
-        ?>
+    }
+    ?>
 
-        <form method="post">
-            <input type="hidden" name="activity_id" value="<?php echo $activity_id; ?>">
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Название</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="activity_title" value="<?php echo $activity_title; ?>">
-                </div>
+    <form method="post">
+        <input type="hidden" name="activity_id" value="<?php echo $activity_id; ?>">
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Название</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="activity_title" value="<?php echo $activity_title; ?>">
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Стоимость</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="price" value="<?php echo $price; ?>">
-                </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Стоимость</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="price" value="<?php echo $price; ?>">
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Возрастные ограничения</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="age_restrictions" value="<?php echo $age_restrictions; ?>">
-                </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Возрастные ограничения</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="age_restrictions"
+                       value="<?php echo $age_restrictions; ?>">
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Максимальное количество человек</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="max_count_people" value="<?php echo $max_count_people; ?>">
-                </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Максимальное количество человек</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="max_count_people"
+                       value="<?php echo $max_count_people; ?>">
             </div>
+        </div>
 
-            <?php
-            if (!empty($successMessage)) {
-                echo "
+        <?php
+        if (!empty($successMessage)) {
+            echo "
                 <div class='row mb-3'>
                     <div class='offset-sm-3 col-sm-6'>
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
@@ -148,19 +150,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                 </div>
                 ";
-            }
-            ?>
+        }
+        ?>
 
-            <div class="row mb-3">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">Подтвердить</button>
-                </div>
-                <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/park/index.php" role="button">Отменить</a>
-                </div>
+        <div class="row mb-3">
+            <div class="offset-sm-3 col-sm-3 d-grid">
+                <button type="submit" class="btn btn-primary">Подтвердить</button>
             </div>
-        </form>
-    </div>
+            <div class="col-sm-3 d-grid">
+                <a class="btn btn-outline-primary" href="/park/index.php" role="button">Отменить</a>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 
 </html>

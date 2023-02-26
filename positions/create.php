@@ -1,74 +1,47 @@
 <?php
-
 $connection = new mysqli(
     "localhost",
     "root",
     "",
-    "park"
-);
+    "park");
 
-$job_id = "";
-$job_title = "";
-$responsibilities = "";
-$work_experience = "";
+$position_title = "";
+$duties = "";
+$min_experience = "";
 
 $errorMessage = "";
 $successMessage = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-    if (!isset($_GET["job_id"])) {
-        header("location: /index.php");
-        exit;
-    }
-
-    $job_id = $_GET["job_id"];
-
-    $sql = "SELECT * FROM jobs WHERE job_id=$job_id";
-    $result = $connection->query($sql);
-    $row = $result->fetch_assoc();
-
-    if (!$row) {
-        header("location: /index.php");
-        exit;
-    }
-
-    $job_title = $row["job_title"];
-    $responsibilities = $row["responsibilities"];
-    $work_experience = $row["work_experience"];
-
-} else {
-
-    $job_id = $_POST["job_id"];
-    $job_title = $_POST["job_title"];
-    $responsibilities = $_POST["responsibilities"];
-    $work_experience = $_POST["work_experience"];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $position_title = $_POST["position_title"];
+    $duties = $_POST["duties"];
+    $min_experience = $_POST["min_experience"];
 
     do {
         if (
-            empty($job_id) ||
-            empty($job_title) ||
-            empty($responsibilities) ||
-            empty($work_experience)
+            empty($position_title) ||
+            empty($duties) ||
+            empty($min_experience)
         ) {
             $errorMessage = "Все поля должны быть заполнены";
             break;
         }
 
-        $sql = "UPDATE jobs " .
-            "SET job_title = '$job_title', 
-            responsibilities = '$responsibilities', 
-            work_experience = '$work_experience' " .
-            "WHERE job_id = $job_id";
-
+        $sql = "INSERT INTO positions (position_title, duties, min_experience)" .
+            "VALUES ('$position_title', '$duties', '$min_experience')";
         $result = $connection->query($sql);
 
         if (!$result) {
-            $errorMessage = "Invalid query: " . $connection->error;
+            $errorMessage = "Неверное значение: " . $connection->error;
             break;
         }
 
-        $successMessage = "Успешно обновлено";
+
+        $position_title = "";
+        $duties = "";
+        $min_experience = "";
+
+        $successMessage = "Успешно добавлено";
 
         header("location: /index.php");
         exit;
@@ -91,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 <body>
 <div class="container my-5">
-    <h2>Изменить данные</h2>
+    <h2>Добавить</h2>
 
     <?php
     if (!empty($errorMessage)) {
@@ -105,24 +78,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     ?>
 
     <form method="post">
-        <input type="hidden" name="job_id" value="<?php echo $job_id; ?>">
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Название</label>
+            <label class="col-sm-3 col-form-label">Должность</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="job_title" value="<?php echo $job_title; ?>">
+                <input type="text" class="form-control" name="position_title" value="<?php echo $position_title; ?>">
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Обязанности</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="responsibilities" value="<?php echo $responsibilities; ?>">
+                <input type="text" class="form-control" name="position_title" value="<?php echo $duties; ?>">
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Требуемый опыт</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="work_experience"
-                       value="<?php echo $work_experience; ?>">
+                <input type="text" class="form-control" name="age_restrictions"
+                       value="<?php echo $min_experience; ?>">
             </div>
         </div>
 
